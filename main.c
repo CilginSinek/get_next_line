@@ -1,10 +1,16 @@
-#include <fcntl.h>
+/* #include <fcntl.h>
 #include "get_next_line.h"
 #include <stdio.h>
 
 int main(void)
 {
-    int fd = 0;
-    get_next_line(fd);
+    int fd = open("lorem.txt", O_RDONLY);
+    int x;
+
+    x = 3;
+    while (x--)
+    {
+        printf("%s\n",get_next_line(fd));
+    }
     close(fd);
-}
+} */
