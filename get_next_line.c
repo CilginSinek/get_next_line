@@ -6,7 +6,7 @@
 /*   By: iduman <iduman@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 14:46:28 by iduman            #+#    #+#             */
-/*   Updated: 2025/06/27 16:32:44 by iduman           ###   ########.fr       */
+/*   Updated: 2025/06/27 17:32:15 by iduman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ char *append_cage(int fd,char *cage)
 		cage = NULL;
 	tmp = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	while (ft_strchr(cage,'\n') == NULL)
-	{
-				
+	{	
 		read_res = read(fd,tmp,BUFFER_SIZE);
 		if(read_res == -1)
 		{
@@ -103,8 +102,10 @@ char	*get_next_line(int fd)
 	if(fd == -1)
 		return (NULL);
 	cage = append_cage(fd,cage);
-	if(cage == NULL)
+	if(cage == NULL || ft_strlen(cage) == 0)
 	{
+		if(cage != NULL)
+			free(cage);
 		return (NULL);
 	}
 	line = get_l(cage);

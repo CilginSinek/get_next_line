@@ -5,16 +5,11 @@
 int main(void)
 {
     int fd = open("test.txt", O_RDONLY);
-    //char buff[42];
-    printf("%s",get_next_line(fd));
-    //printf("%s",get_next_line(fd));
-    //printf("%s",get_next_line(fd));
-/*      int x;
+    char *a = get_next_line(fd);
+    char *b =get_next_line(fd);
+    printf("%s",b);
+    free(a);
+    free(b);
 
-    x = 2;
-    while (x--)
-    {
-        printf("%s",get_next_line(fd));
-    } */
     close(fd);
 }
