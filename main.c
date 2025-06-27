@@ -4,13 +4,17 @@
 
 int main(void)
 {
-    int fd = open("lorem.txt", O_RDONLY);
-    int x;
+    int fd = open("test.txt", O_RDONLY);
+    //char buff[42];
+    printf("%s",get_next_line(fd));
+    //printf("%s",get_next_line(fd));
+    //printf("%s",get_next_line(fd));
+/*      int x;
 
-    x = 1;
+    x = 2;
     while (x--)
     {
-        printf("%s\n",get_next_line(fd));
-    }
+        printf("%s",get_next_line(fd));
+    } */
     close(fd);
 }
