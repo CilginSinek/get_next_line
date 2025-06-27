@@ -35,23 +35,24 @@ char *append_cage(int fd,char *cage)
 	char *tmp;
 	ssize_t	read_res;
 
-	if(!cage)
-		cage = NULL;
 	tmp = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if(!tmp)
+		return (NULL);
 	while (ft_strchr(cage,'\n') == NULL)
 	{	
-		read_res = read(fd,tmp,BUFFER_SIZE);
+		read_res = read(fd, tmp, BUFFER_SIZE);
 		if(read_res == -1)
 		{
-			free(tmp);
 			free(cage);
+			free(tmp);
 			return(NULL);
 		}
 		if(read_res == 0)
 			break;
-		tmp[read_res] = 0;
-		
+		tmp[read_res] = '\0';
 		cage = ft_strjoin(cage,tmp);
+		if(cage == NULL)
+			break;
 	}
 	free(tmp);
 	return (cage);
@@ -99,13 +100,16 @@ char	*get_next_line(int fd)
 	char *line;
 	static char *cage;
 
-	if(fd == -1)
+
+    if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	cage = append_cage(fd,cage);
-	if(cage == NULL || ft_strlen(cage) == 0)
+	if (cage == NULL)
+		return (NULL);
+	if (ft_strlen(cage) == 0)
 	{
-		if(cage != NULL)
-			free(cage);
+		free(cage);
+		cage = NULL;
 		return (NULL);
 	}
 	line = get_l(cage);
