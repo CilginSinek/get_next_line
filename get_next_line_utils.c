@@ -6,12 +6,11 @@
 /*   By: iduman <iduman@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 14:46:32 by iduman            #+#    #+#             */
-/*   Updated: 2025/06/27 16:31:41 by iduman           ###   ########.fr       */
+/*   Updated: 2025/06/28 12:50:43 by iduman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 size_t	ft_strlen(const char *s)
 {
