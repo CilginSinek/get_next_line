@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	gft_strlen(const char *s)
 {
 	size_t	c;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (c);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*gft_strjoin(char *s1, char const *s2)
 {
 	char	*nstr;
 	size_t	s1_len;
@@ -31,8 +31,8 @@ char	*ft_strjoin(char *s1, char const *s2)
 
 	s1_len = 0;
 	if (s1 != NULL)
-		s1_len = ft_strlen(s1);
-	nstr = (char *)malloc(s1_len + ft_strlen(s2) + 1);
+		s1_len = gft_strlen(s1);
+	nstr = (char *)malloc(s1_len + gft_strlen(s2) + 1);
 	if (!nstr)
 		return ((char *) NULL);
 	i = 0;
@@ -51,7 +51,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return (nstr);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*gft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*ptr;
 	unsigned char	*orig_ptr;
@@ -67,7 +67,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return ((void *)orig_ptr);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gft_strchr(const char *s, int c)
 {
 	if (s == NULL)
 		return (NULL);
@@ -81,21 +81,21 @@ char	*ft_strchr(const char *s, int c)
 	}
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*gft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	new_len;
 
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_calloc(1, sizeof(char)));
-	new_len = ft_strlen(s) - start;
+	if (start >= gft_strlen(s))
+		return (gft_calloc(1, sizeof(char)));
+	new_len = gft_strlen(s) - start;
 	if (new_len > len)
 		new_len = len;
 	str = (char *)malloc(sizeof(char) * (new_len + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, s + start, new_len + 1);
+	gft_strlcpy(str, s + start, new_len + 1);
 	return (str);
 }

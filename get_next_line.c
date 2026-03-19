@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	gft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
 
@@ -26,18 +26,18 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		}
 		dest[i] = '\0';
 	}
-	return (ft_strlen(src));
+	return (gft_strlen(src));
 }
 
-char	*append_cage(int fd, char *cage)
+static char	*append_cage(int fd, char *cage)
 {
 	char	*tmp;
 	ssize_t	read_res;
 
-	tmp = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	tmp = (char *)gft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
 		return (NULL);
-	while (ft_strchr(cage, '\n') == NULL)
+	while (gft_strchr(cage, '\n') == NULL)
 	{
 		read_res = read(fd, tmp, BUFFER_SIZE);
 		if (read_res == -1)
@@ -49,7 +49,7 @@ char	*append_cage(int fd, char *cage)
 		if (read_res == 0)
 			break ;
 		tmp[read_res] = '\0';
-		cage = ft_strjoin(cage, tmp);
+		cage = gft_strjoin(cage, tmp);
 		if (cage == NULL)
 			break ;
 	}
@@ -57,25 +57,25 @@ char	*append_cage(int fd, char *cage)
 	return (cage);
 }
 
-char	*get_l(char *cage)
+static char	*get_l(char *cage)
 {
 	char	*chr_add;
 	char	*line;
 
-	chr_add = ft_strchr(cage, '\n');
+	chr_add = gft_strchr(cage, '\n');
 	if (chr_add == NULL)
-		return (ft_substr(cage, 0, ft_strlen(cage)));
-	line = ft_substr(cage, 0, chr_add - cage + 1);
+		return (gft_substr(cage, 0, gft_strlen(cage)));
+	line = gft_substr(cage, 0, chr_add - cage + 1);
 	return (line);
 }
 
-char	*get_fresh_cage(char *cage)
+static char	*get_fresh_cage(char *cage)
 {
 	char	*org_cage;
 	char	*return_cage;
 
 	org_cage = cage;
-	cage = ft_strchr(cage, '\n');
+	cage = gft_strchr(cage, '\n');
 	if (cage == NULL)
 	{
 		free(org_cage);
@@ -84,10 +84,10 @@ char	*get_fresh_cage(char *cage)
 	cage++;
 	if (!cage)
 		return (NULL);
-	return_cage = (char *)ft_calloc(ft_strlen(cage) + 1, sizeof(char));
+	return_cage = (char *)gft_calloc(gft_strlen(cage) + 1, sizeof(char));
 	if (!return_cage)
 		return (NULL);
-	ft_strlcpy(return_cage, cage, ft_strlen(cage) + 1);
+	gft_strlcpy(return_cage, cage, gft_strlen(cage) + 1);
 	free(org_cage);
 	return (return_cage);
 }
@@ -102,7 +102,7 @@ char	*get_next_line(int fd)
 	cage = append_cage(fd, cage);
 	if (cage == NULL)
 		return (NULL);
-	if (ft_strlen(cage) == 0)
+	if (gft_strlen(cage) == 0)
 	{
 		free(cage);
 		cage = NULL;
