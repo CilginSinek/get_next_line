@@ -100,7 +100,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (cage)
+		{
 			free(cage);
+			cage = NULL;
+		}
 		return (NULL);
 	}
 	cage = append_cage(fd, cage);
